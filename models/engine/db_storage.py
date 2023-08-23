@@ -16,11 +16,11 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 classes = {"Amenity": Amenity, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
+
 class DBStorage:
     """New engine"""
     __engine = None
     __session = None
-
 
     def __init__(self):
         """initialization of class"""
