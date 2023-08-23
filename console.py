@@ -3,14 +3,13 @@
 import cmd
 import sys
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage
 from models.user import User
 from models.place import Place
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -115,15 +114,31 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        arg0 = args.split()
-        if len(arg0) == 0:
+        try:
+            if not args:
+                raise SyntaxError()
+
+            arg = args.split(" ")
+            class_name = arg[0]
+
+            if class_name not in HBNBCommand.classes:
+                raise NameError()
+
+            obj = eval(class_name)()
+            for i in arg[1:]:
+                if "=" not in i:
+                    continue
+                key, value = i.split('=')
+                value = value.replace('_', ' ')
+                if hasattr(obj, key):
+                    setattr(obj, key, eval(value))
+            obj.save()
+            print("{}".format(obj.id))
+
+        except SyntaxError:
             print("** class name missing **")
-        elif arg0[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-        else:
-            new_instance = HBNBCommand.classes[arg0[0]]()
-            print(new_instance.id)
-            storage.save()
+        except NameError:
+            return (print(self.errors["ClassUnknown"]))
 
     def help_create(self):
         """ Help information for the create method """
@@ -205,11 +220,11 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(eval(args)).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append(str(v))
 
         print(print_list)
