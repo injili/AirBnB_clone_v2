@@ -26,7 +26,7 @@ STATIC_WEB="\\
 	}
 "
 
-sudo sed -i "35i $STATIC_WEB" /etc/nginx/sites-available/default
+sudo sed -i '/listen 80 default_server/a location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default
 
-# restart Nginx
+# restart nginx
 sudo service nginx restart
