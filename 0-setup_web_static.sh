@@ -26,13 +26,35 @@ sudo ln -sf /data/web_static/releases/test /data/web_static/current
 sudo chown -hR ubuntu:ubuntu /data
 
 # updating the Nginx configuration to serve the content to hbnb_static
-STATIC_WEB="\\
-	location /hbnb_static/ {
-		alias /data/web_static/current/;
-	}
-"
+sudo tee /etc/nginx/sites-available/default << EOF
+server {
+	listen 80;
+	listen [::]:80 default_server;
 
-sudo sed -i '/listen 80 default_server/a location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default
+	server_name _;
+
+	location /hbnb_static/ {
+                alias /data/web_static/current/;
+        }
+
+	location /redirect_me/ {
+		return 301 https://github/injili;
+	}
+
+	root /var/www/html;
+	index index.html index.htm;
+
+	error_page 404 /custom_404.html;
+	location = /custom_404.html {
+		internal;
+		return 404 "Ceci n'est pas une page\n";
+	}
+
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+}
+EOF
 
 # restart nginx
 sudo service nginx restart
