@@ -6,7 +6,7 @@ sudo apt-get -y update
 sudo apt-get -y install nginx
 
 # create folders
-sudo mkdir -P /data/web_static/releases/test /data/web_static/shared
+sudo mkdir -p /data/web_static/releases/test /data/web_static/shared
 
 # create the test html file
 sudo sh -c "echo '
@@ -26,7 +26,7 @@ STATIC_WEB="\\
 	}
 "
 
-sudo sed -i "35i $STATIC_WEB" /etc/nginx/sites_available/default
+sudo sed -i "35i $STATIC_WEB" /etc/nginx/sites-available/default
 
 # restart Nginx
 sudo service nginx restart
