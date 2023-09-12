@@ -10,7 +10,13 @@ sudo mkdir -p /data/web_static/releases/test /data/web_static/shared
 
 # create the test html file
 sudo sh -c "echo '
-The difference between a saint and a sinner is a good reason
+<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>
 ' >> /data/web_static/releases/test/index.html"
 
 # create symbolic link
