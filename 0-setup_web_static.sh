@@ -17,7 +17,7 @@ sudo sh -c "echo '
     Holberton School
   </body>
 </html>
-' >> /data/web_static/releases/test/index.html"
+' > /data/web_static/releases/test/index.html"
 
 # create symbolic link
 sudo ln -sf /data/web_static/releases/test /data/web_static/current
