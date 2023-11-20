@@ -52,7 +52,7 @@ def number_template(n):
         return render_template('5-number.html', my_int=n)
 
 
-@app.route('/number_odd_or_even/<int:n>', script_slashes=False)
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def number_odd_or_even(n):
     """if n is an integer the HTML page is rendered"""
     response = ""
