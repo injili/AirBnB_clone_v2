@@ -25,15 +25,12 @@ def c_is_fun():
     return response
 
 
+@app.route('python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python_is_cool(test):
+def python_is_cool(test="is cool"):
     """Returns "Python "followed by the text passed
     If no text is passedit returns Python is cool"""
-    if text:
-        response = "Python {}".format(text.replace("_", " "))
-    else:
-        response = "Python Is cool"
-
+    response = "Python {}".format(text.replace("_", " "))
     return response
 
 
