@@ -5,8 +5,8 @@ A script that starts a Flask web application
 app = Flask(__name__)
 
 
-@app.route(i'/', strict_slashes=False)
-def hello():t retur
+@app.route('/', strict_slashes=False)
+def hello():
     """ Returns Hello HBNB!"""
     return ("Hello HBNB!")
 
@@ -27,7 +27,7 @@ def c_is_fun():
 @app.route('/python/<text>', strict_slashes=False)
 def python_is_cool(test):
     """Returns "Python "followed by the text passed
-        If no text is passedit returns Python is cool"""
+    If no text is passedit returns Python is cool"""
     if text:
         response = "Python {}".format(text.replace("_", " "))
     else:
