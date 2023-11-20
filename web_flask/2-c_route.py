@@ -7,7 +7,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def hello():
     """
     Displays Hello HBNB
@@ -15,7 +15,7 @@ def hello():
     return ("Hello HBNB")
 
 
-@app.route('/hbnb')
+@app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """
     Displays HBNB when called
@@ -23,14 +23,14 @@ def hbnb():
     return ("HBNB")
 
 
-@app.route('/c/<text>')
+@app.route('/c/<text>', strict_slashes=False)
 def c_is_fun(text):
     """
     Displays C followed by the value in 'text'
     """
-    response = 'C {}'.format(text)
+    response = 'C {}'.format(text.replace("_", " "))
     return response
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000', strict_slashes=False)
+    app.run(host='0.0.0.0', port='5000', debug=True)
