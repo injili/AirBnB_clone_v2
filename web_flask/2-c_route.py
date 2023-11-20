@@ -4,7 +4,7 @@ Display custom text and C, C is fun
 """
 from flask import Flask
 
-app = Flask("__name__")
+app = Flask(__name__)
 
 
 @app.route('/')
@@ -24,7 +24,7 @@ def hbnb():
 
 
 @app.route('/c/<text>')
-def c_ic_fun(text):
+def c_is_fun(text):
     """
     Displays C followed by the value in 'text'
     """
