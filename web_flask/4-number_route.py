@@ -40,7 +40,9 @@ def python_is_cool(text="is cool"):
 def number(n):
     """is n an integer?"""
     if isinstance(n, int):
-        return ("n is a number")
+        return ("{} is a number".format(n))
+    else:
+        abort(404)
 
 
 if __name__ == '__main__':
