@@ -9,7 +9,7 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route('/states_list', script_slashes=False)
+@app.route('/states_list', strict_slashes=False)
 def states_list():
     """Render html page to display new created States"""
     states = storage.all()
