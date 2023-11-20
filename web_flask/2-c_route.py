@@ -4,7 +4,7 @@ Display custom text and C, C is fun
 """
 from flask import Flask
 
-if __name__ = ('__main__')
+app = Flask("__name__")
 
 
 @app.route('/')
